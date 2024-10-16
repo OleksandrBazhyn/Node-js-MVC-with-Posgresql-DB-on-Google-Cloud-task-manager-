@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Detail</title>
+</head>
+<body>
+    <h1>User Details</h1>
+    <p><strong>ID:</strong> <%= user.id %></p>
+    <p><strong>Name:</strong> <%= user.name %></p>
+    <p><strong>Email:</strong> <%= user.email %></p>
+    <a href="/users/edit/<%= user.id %>">Edit User</a>
+    <form action="/users/delete/<%= user.id %>" method="POST">
+        <button type="submit">Delete User</button>
+    </form>
+    <br>
+    <a href="/users">Back to User List</a>
+</body>
+</html>

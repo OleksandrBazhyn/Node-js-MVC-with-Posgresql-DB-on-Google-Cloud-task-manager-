@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Деталі задачі</title>
+</head>
+<body>
+    <h1>Деталі задачі: <%= task.title %></h1>
+    <p>Опис: <%= task.description ? task.description : 'Немає опису' %></p>
+    <p>Статус: <%= task.completed ? 'Завершено' : 'Не завершено' %></p>
+    <p>Створено: <%= task.createdAt.toLocaleString() %></p>
+    <p>Оновлено: <%= task.updatedAt ? task.updatedAt.toLocaleString() : 'Не було оновлень' %></p>
+    <a href="/tasks">Назад до списку задач</a>
+</body>
+</html>

@@ -2,39 +2,21 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager</title>
+    <title>Список задач</title>
 </head>
 <body>
     <h1>Список задач</h1>
-
-    <form action="/tasks/create" method="POST">
-        <label for="title">Назва задачі:</label>
-        <input type="text" id="title" name="title" required>
-        
-        <label for="description">Опис:</label>
-        <textarea id="description" name="description"></textarea>
-        
-        <button type="submit">Додати задачу</button>
-    </form>
-
-    <h2>Всі задачі</h2>
     <ul>
         <% tasks.forEach(task => { %>
             <li>
-                <strong><%= task.title %></strong>
-                <p><%= task.description %></p>
-                <p>Статус: <%= task.completed ? 'Завершено' : 'В процесі' %></p>
-                <p>Дата створення: <%= new Date(task.createdAt).toLocaleString() %></p>
-                <p>Дата оновлення: <%= task.updatedAt ? new Date(task.updatedAt).toLocaleString() : 'Не оновлювалась' %></p>
-                <form action="/tasks/update/<%= task.id %>" method="POST" style="display:inline;">
-                    <button type="submit">Оновити</button>
-                </form>
-                <form action="/tasks/delete/<%= task.id %>" method="POST" style="display:inline;">
+                <a href="/tasks/<%= task.id %>"><%= task.title %></a>
+                <a href="/tasks/<%= task.id %>/edit">Редагувати</a>
+                <form action="/tasks/<%= task.id %>?_method=DELETE" method="POST" style="display:inline;">
                     <button type="submit">Видалити</button>
                 </form>
             </li>
-        <% }); %>
+        <% }) %>
     </ul>
+    <a href="/tasks/new">Додати нову задачу</a>
 </body>
 </html>

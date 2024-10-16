@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const { initDb } = require('./models');
 const userRoutes = require('./routes/userRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.json());
 
 app.use('/users', userRoutes);
