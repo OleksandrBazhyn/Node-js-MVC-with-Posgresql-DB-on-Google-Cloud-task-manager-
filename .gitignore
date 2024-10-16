@@ -104,6 +104,12 @@ dist
 .temp
 .cache
 
+# Visual Studio Code temp and cache directory
+.vscode/
+
+# Visual Studio Code temp and cache directory
+.vs/
+
 # Docusaurus cache and generated files
 .docusaurus
 
