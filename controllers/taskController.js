@@ -1,7 +1,6 @@
 const { Task } = require('../models');
 
 exports.createTask = async (req, res) => {
-    const { userId, title } = req.body;
     try {
         const task = await Task.create(req.body);
         res.redirect('/tasks');
