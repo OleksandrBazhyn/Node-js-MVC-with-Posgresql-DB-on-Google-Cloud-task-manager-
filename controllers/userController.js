@@ -1,6 +1,6 @@
 const { User } = require('../models');
 
-exports.createUser = async (req, res) => {
+const createUser = async (req, res) => {
     try {
         const user = await User.create(req.body);
         res.status(201).redirect('/users');
@@ -9,7 +9,7 @@ exports.createUser = async (req, res) => {
     }
 };
 
-exports.getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
     try {
         const users = await User.findAll();
         res.status(200).render('userList', { users });
@@ -18,7 +18,7 @@ exports.getAllUsers = async (req, res) => {
     }
 };
 
-exports.getUserById = async (req, res) => {
+const getUserById = async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
         if (!user) return res.status(404).render('error', { error: 'User not found' });
@@ -28,7 +28,7 @@ exports.getUserById = async (req, res) => {
     }
 };
 
-exports.updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
         if (!user) return res.status(404).render('error', { error: 'User not found' });
@@ -40,7 +40,7 @@ exports.updateUser = async (req, res) => {
     }
 };
 
-exports.deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
         if (!user) return res.status(404).render('error', { error: 'User not found' });
@@ -50,4 +50,12 @@ exports.deleteUser = async (req, res) => {
     } catch (error) {
         res.status(500).render('error', { error: 'Server error' });
     }
+};
+
+module.exports = {
+    createUser,
+    getAllUsers,
+    getUserById,
+    updateUser,
+    deleteUser
 };
