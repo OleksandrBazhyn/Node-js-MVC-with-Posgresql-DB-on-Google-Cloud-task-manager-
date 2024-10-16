@@ -12,4 +12,17 @@ const sequelize = new Sequelize(
     }
 );
 
-module.exports = sequelize;
+const initDb = async () => {
+    try {
+        await sequelize.authenticate();
+        console.log('Connection has been established successfully.');
+
+        // Створення бази даних, якщо її немає
+        await sequelize.sync();
+        console.log('Database synced successfully.');
+    } catch (error) {
+        console.error('Unable to connect to the database:', error);
+    }
+};
+
+module.exports = { sequelize, initDb };

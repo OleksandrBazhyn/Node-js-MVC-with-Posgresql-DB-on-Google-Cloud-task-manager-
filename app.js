@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const { initDb } = require('./models');
+const { initDb } = require('./config/database');
 const userRoutes = require('./routes/userRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 
@@ -12,9 +12,13 @@ app.use(express.json());
 app.use('/users', userRoutes);
 app.use('/tasks', taskRoutes);
 
-initDb();
+const startServer = async () => {
+    await initDb();
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+};
+
+startServer();
