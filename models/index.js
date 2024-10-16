@@ -2,7 +2,7 @@ const sequelize = require('../config/database');
 const User = require('./user');
 const Task = require('./task');
 
-const initDB = async () => {
+const initDb = async () => {
     try {
         await sequelize.sync();
         console.log('Database initialized');
