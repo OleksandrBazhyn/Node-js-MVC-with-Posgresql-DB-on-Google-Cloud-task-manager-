@@ -5,7 +5,12 @@ const User = require('./user');
 const Task = sequelize.define('Task', {
     title: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            len: [1, 255],
+            is: /^[a-zA-Z0-9 ]+$/i
+        }
     },
     description: {
         type: DataTypes.TEXT,
