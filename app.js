@@ -9,6 +9,9 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.json());
 
+app.get('/', (req, res) => {
+    res.status(301).redirect('/tasks');
+});
 app.use('/users', userRoutes);
 app.use('/tasks', taskRoutes);
 
