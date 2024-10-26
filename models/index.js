@@ -1,6 +1,7 @@
 const sequelize = require('../config/database');
 const User = require('./user');
 const Task = require('./task');
+const Attachment = require('./attachment');
 
 const initDb = async () => {
     try {

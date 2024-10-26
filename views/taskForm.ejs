@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Додати нову задачу</title>
+</head>
+<body>
+    <h1>Додати нову задачу</h1>
+    <form action="/tasks/create" method="POST">
+        <label for="title">Назва:</label>
+        <input type="text" id="title" name="title" required>
+        <br>
+        <label for="description">Опис:</label>
+        <textarea id="description" name="description"></textarea>
+        <br>
+        <button type="submit">Додати задачу</button>
+    </form>
+    <a href="/tasks">Повернутися до задач</a>
+</body>
+</html>

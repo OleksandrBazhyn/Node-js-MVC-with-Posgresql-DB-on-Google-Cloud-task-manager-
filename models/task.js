@@ -13,8 +13,7 @@ const Task = sequelize.define('Task', {
         allowNull: false,
         validate: {
             notEmpty: true,
-            len: [1, 255],
-            is: /^[a-zA-Z0-9 ]+$/i
+            len: [1, 255]
         }
     },
     description: {
