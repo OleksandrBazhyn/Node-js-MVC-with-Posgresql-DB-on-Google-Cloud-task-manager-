@@ -2,9 +2,11 @@ const { User } = require('../models');
 
 const createUser = async (req, res) => {
     try {
+        console.log('userController.createUser\nRequest Body: ', req.body);
         const user = await User.create(req.body);
-        res.status(201).redirect('/users');
+        res.redirect('/users');
     } catch (error) {
+        console.log('userController.createUser\nError: ', error);
         res.status(400).render('userForm', { error: error.errors.map(e => e.message) });
     }
 };
@@ -21,22 +23,40 @@ const getAllUsers = async (req, res) => {
 const getUserById = async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
-        if (!user) return res.status(404).render('error', { error: 'User not found' });
+        if (!user) {
+            return res.status(404).send('Користувач не знайдений');
+        }
+        if (req.path.includes('/edit')) {
+            return res.render('userEdit', { user });
+        }
+
         res.status(200).render('userDetail', { user });
     } catch (error) {
-        res.status(500).render('error', { error: 'Server error' });
+        res.status(500).send('Виникла помилка при отриманні користувачів');
     }
 };
 
 const updateUser = async (req, res) => {
     try {
+        const userId = req.params.id;
         const user = await User.findByPk(req.params.id);
-        if (!user) return res.status(404).render('error', { error: 'User not found' });
+        if (user) {
+            console.log("Старі дані:", user.username, user.email);
 
-        await user.update(req.body);
-        res.status(200).redirect('/users');
+            user.username = req.body.username;
+            user.email = req.body.email;
+
+            console.log("Нові дані:", user.username, user.email);
+
+            await user.save();
+
+            res.redirect(`/users/${userId}`);
+        } else {
+            res.status(404).send('Користувача не знайдено');
+        }
     } catch (error) {
-        res.status(400).render('userForm', { user: req.body, error: error.errors.map(e => e.message) });
+        console.error(error);
+        res.status(500).send('Виникла помилка');
     }
 };
 

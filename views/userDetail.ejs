@@ -7,12 +7,11 @@
 </head>
 <body>
     <h1>User Details</h1>
-    <p><strong>ID:</strong> <%= user.id %></p>
-    <p><strong>Name:</strong> <%= user.name %></p>
+    <p><strong>Name:</strong> <%= user.username %></p>
     <p><strong>Email:</strong> <%= user.email %></p>
-    <a href="/users/edit/<%= user.id %>">Edit User</a>
-    <form action="/users/delete/<%= user.id %>" method="POST">
-        <button type="submit">Delete User</button>
+    <a href="/users/<%= user.id %>/edit">Edit User</a>
+    <form action="/users/<%= user.id %>?_method=DELETE" method="POST" style="display:inline;">
+        <button type="submit">Delete</button>
     </form>
     <br>
     <a href="/users">Back to User List</a>

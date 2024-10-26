@@ -20,13 +20,12 @@
         <tbody>
             <% users.forEach(user => { %>
                 <tr>
-                    <td><%= user.id %></td>
-                    <td><%= user.name %></td>
+                    <td><%= user.username %></td>
                     <td><%= user.email %></td>
                     <td>
                         <a href="/users/<%= user.id %>">View</a>
-                        <a href="/users/edit/<%= user.id %>">Edit</a>
-                        <form action="/users/delete/<%= user.id %>" method="POST" style="display:inline;">
+                        <a href="/users/<%= user.id %>/edit">Edit</a>
+                        <form action="/users/<%= user.id %>?_method=DELETE" method="POST" style="display:inline;">
                             <button type="submit">Delete</button>
                         </form>
                     </td>

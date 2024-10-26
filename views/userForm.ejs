@@ -3,25 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= user ? 'Edit User' : 'Create User' %></title>
+    <title>Додати нового користувача</title>
 </head>
 <body>
-    <h1><%= user ? 'Edit User' : 'Create User' %></h1>
-    <form action="<%= user ? '/users/update/' + user.id : '/users/create' %>" method="POST">
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" value="<%= user ? user.name : '' %>" required>
-        </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" value="<%= user ? user.email : '' %>" required>
-        </div>
-        <button type="submit"><%= user ? 'Update User' : 'Create User' %></button>
+    <h1>Додати нового користувача</h1>
+    <form action="/users/create" method="POST">
+        <label for="username">Назва:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="email">Електронна пошта:</label>
+        <textarea id="email" name="email"></textarea>
+        <br>
+        <button type="submit">Додати користувача</button>
     </form>
-    <% if (error) { %>
-        <p style="color: red;"><%= error.join(', ') %></p>
-    <% } %>
-    <br>
-    <a href="/users">Back to User List</a>
+    <a href="/users">Повернутися до користувачів</a>
 </body>
 </html>
