@@ -23,24 +23,45 @@ const getAllTasks = async (req, res) => {
 const getTaskById = async (req, res) => {
     try {
         const task = await Task.findByPk(req.params.id);
-        if (!task) return res.status(404).render('error', { error: 'Task not found' });
+        if (!task) {
+            return res.status(404).send('Задача не знайдена');
+        }
+        
+        if (req.path.includes('/edit')) {
+            return res.render('taskEdit', { task });
+        }
+        
         res.render('taskDetail', { task });
     } catch (error) {
-        res.status(500).render('error', { error: 'Server error' });
+        res.status(500).send('Виникла помилка при отриманні задачі');
     }
 };
 
 const updateTask = async (req, res) => {
     try {
-        const task = await Task.findByPk(req.params.id);
-        if (!task) return res.status(404).render('error', { error: 'Task not found' });
+        const taskId = req.params.id;
+        const task = await Task.findByPk(taskId);
+        if (task) {
+            console.log("Старі дані:", task.title, task.description, task.completed);
+            
+            task.title = req.body.title;
+            task.description = req.body.description;
+            task.completed = req.body.completed;
+            
+            console.log("Нові дані:", task.title, task.description, task.completed);
 
-        await task.update(req.body);
-        res.redirect('/tasks');
+            await task.save();
+
+            res.redirect(`/tasks/${taskId}`);
+        } else {
+            res.status(404).send('Задачу не знайдено');
+        }
     } catch (error) {
-        res.status(400).render('error', { error: error.errors.map(e => e.message) });
+        console.error(error);
+        res.status(500).send('Виникла помилка');
     }
 };
+
 
 const deleteTask = async (req, res) => {
     try {

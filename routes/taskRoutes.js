@@ -11,7 +11,10 @@ router.get('/', taskController.getAllTasks);
 
 router.get('/:id', taskController.getTaskById);
 
-router.put('/:id', taskController.updateTask);
+router.get('/:id/edit', taskController.getTaskById, (req, res) => {
+    res.render('taskEdit', { task: req.task });
+});
+router.put('/:id/edit', taskController.updateTask);
 
 router.delete('/:id', taskController.deleteTask);
 
