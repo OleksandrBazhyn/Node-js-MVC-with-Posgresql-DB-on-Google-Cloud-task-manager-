@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Додати нове вкладення</title>
+</head>
+<body>
+    <h1>Додати нове вкладення</h1>
+    <form action="/attachments/create" method="POST">
+        <label for="fileUrl">Посилання на файл:</label>
+        <input type="text" id="fileUrl" name="fileUrl" required>
+        <br>
+        <label for="task">Завдання:</label>
+        <select name="TaskId" id="task" required>
+            <% tasks.forEach(task => { %>
+                <option value="<%= task.id %>"><%= task.title %></option>
+            <% }) %>
+        </select>
+        <br>
+        <button type="submit">Додати задачу</button>
+    </form>
+    <a href="/attachments">Повернутися до задач</a>
+</body>
+</html>

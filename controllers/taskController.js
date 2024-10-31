@@ -4,7 +4,7 @@ const createTask = async (req, res) => {
     try {
         console.log('taskController.createTask\nRequest Body: ', req.body);
         const task = await Task.create(req.body);
-        res.redirect('/tasksList');
+        res.status(301).redirect('/tasksList');
     } catch (error) {
         console.log('taskController.createTask\nError: ', error);
         res.status(400).render('taskForm', { error: error.errors.map(e => e.message) });
@@ -14,7 +14,7 @@ const createTask = async (req, res) => {
 const getAllTasks = async (req, res) => {
     try {
         const tasks = await Task.findAll();
-        res.render('tasks', { tasks });
+        res.status(200).render('tasksList', { tasks });
     } catch (error) {
         res.status(500).render('error', { error: 'Server error' });
     }

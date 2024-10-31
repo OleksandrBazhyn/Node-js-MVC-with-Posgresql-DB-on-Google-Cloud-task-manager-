@@ -5,6 +5,7 @@ const path = require('path');
 const { initDb } = require('./config/database');
 const userRoutes = require('./routes/userRoutes');
 const taskRoutes = require('./routes/taskRoutes');
+const attachmentRoutes = require('./routes/attachmentRoutes');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 
 app.use('/users', userRoutes);
 app.use('/tasks', taskRoutes);
+app.use('/attachments', attachmentRoutes);
 
 const startServer = async () => {
     await initDb();

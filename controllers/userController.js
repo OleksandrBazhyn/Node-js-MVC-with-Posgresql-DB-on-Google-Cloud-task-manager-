@@ -4,7 +4,7 @@ const createUser = async (req, res) => {
     try {
         console.log('userController.createUser\nRequest Body: ', req.body);
         const user = await User.create(req.body);
-        res.redirect('/users');
+        res.status(301).redirect('/users');
     } catch (error) {
         console.log('userController.createUser\nError: ', error);
         res.status(400).render('userForm', { error: error.errors.map(e => e.message) });

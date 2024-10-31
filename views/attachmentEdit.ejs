@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Редагувати вкладення</title>
+</head>
+<body>
+    <h1>Редагувати вкладення</h1>
+    <form action="/attachments/<%= attachment.id %>/edit?_method=PUT" method="POST">
+        <label for="fileUrl">Посилання на файл:</label>
+        <input type="text" id="fileUrl" name="fileUrl" value="<%= attachment.fileUrl %>">
+        <br>
+
+        <button type="submit">Зберегти</button>
+    </form>
+    <a href="/attachments">Повернутися до задач</a>
+</body>
+</html>

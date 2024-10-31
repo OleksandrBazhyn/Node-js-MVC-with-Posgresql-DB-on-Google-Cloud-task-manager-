@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attachments List</title>
+</head>
+<body>
+    <h1>Attachments List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>File URL</th>
+                <th>Task</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% attachments.forEach(attachment => { %>
+                <tr>
+                    <td><%= attachment.id %></td>
+                    <td><%= attachment.fileUrl %></td>
+                    <td>
+                        <% const task = tasks.find(task => task.id === attachment.TaskId); %>
+                        <%= task ? task.title : 'No Task' %>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <h2>All Tasks</h2>
+    <ul>
+        <% tasks.forEach(task => { %>
+            <li><%= task.title %></li>
+        <% }) %>
+    </ul>
+    <br>
+    <a href="/attachments/create">Create New Attachment</a>
+</body>
+</html>

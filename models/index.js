@@ -12,4 +12,4 @@ const initDb = async () => {
     }
 };
 
-module.exports = { initDb, User, Task};
+module.exports = { initDb, User, Task, Attachment};

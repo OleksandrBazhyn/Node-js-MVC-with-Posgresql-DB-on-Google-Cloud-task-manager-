@@ -22,7 +22,13 @@ const Attachment = sequelize.define('Attachment', {
             key: 'id'
         }
     }
+}, {
+    sequelize,
+    modelName: 'Attachment',
+    timestamps: false,
 });
 
 Task.hasMany(Attachment, { onDelete: 'CASCADE' });
 Attachment.belongsTo(Task);
+
+module.exports = Attachment;
