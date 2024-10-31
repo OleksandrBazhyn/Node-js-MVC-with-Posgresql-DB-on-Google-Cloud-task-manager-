@@ -69,7 +69,7 @@ const deleteTask = async (req, res) => {
         if (!task) return res.status(404).render('error', { error: 'Task not found' });
 
         await task.destroy();
-        res.redirect('/tasksList');
+        res.redirect('/tasks');
     } catch (error) {
         res.status(500).render('error', { error: 'Server error' });
     }
