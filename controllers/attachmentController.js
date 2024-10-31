@@ -2,87 +2,57 @@ const { Attachment, Task } = require('../models');
 
 const createAttachment = async (req, res) => {
     try {
-        console.log('attachmentController.createAttachment\nRequest Body: ', req.body);
         const attachment = await Attachment.create(req.body);
-        res.status(301).redirect('/attachments');
+        res.status(201).json(attachment);
     } catch (error) {
-        console.log('attachmentController.createAttachment\nError: ', error);
-        res.status(400).render('attachmentForm', { error: error.errors.map(e => e.message) });
+        res.status(400).json({ error: error.errors.map(e => e.message) });
     }
 };
 
 const getAllAttachments = async (req, res) => {
     try {
         const attachments = await Attachment.findAll();
-        const tasks = await Task.findAll();
-        attachments.sort((a, b) => a.id - b.id);
-        res.status(200).render('attachmentsList', { attachments, tasks });
+        res.status(200).json(attachments);
     } catch (error) {
-        console.error('Error fetching attachments:', error);
-        res.status(500).render('error', { error: 'Server error' });
+        res.status(500).json({ error: 'Server error' });
     }
 };
 
 const getAttachmentById = async (req, res) => {
     try {
-        const attachmentId = req.params.id;
-        const attachment = await Attachment.findByPk(attachmentId);
-        console.log(attachment);
-
+        const attachment = await Attachment.findByPk(req.params.id);
         if (!attachment) {
-            return res.status(404).send('Вкладення не знайдено');
+            return res.status(404).json({ error: 'Вкладення не знайдено' });
         }
-        
-        const task = await Task.findByPk(attachment.TaskId);
-        if (!task) {
-            console.log('Завдання не знайдено для цього вкладення');
-        }
-        console.log(task);
-        
-        if (req.path.includes('/edit')) {
-            const tasks = await Task.findAll();
-            return res.render('attachmentEdit', { attachment, task, tasks });
-        }
-
-        res.render('attachmentDetail', { attachment, task });
+        res.status(200).json(attachment);
     } catch (error) {
-        console.error('Виникла помилка при отриманні вкладення:', error);
-        res.status(500).send('Виникла помилка при отриманні вкладення');
+        res.status(500).json({ error: 'Виникла помилка при отриманні вкладення' });
     }
 };
 
 const updateAttachment = async (req, res) => {
     try {
-        const attachmentId = req.params.id;
-        const attachment = await Attachment.findByPk(attachmentId);
+        const attachment = await Attachment.findByPk(req.params.id);
         if (attachment) {
-            console.log("Старі дані: ", attachment.fileUrl, attachment.TaskId);
-
-            attachment.fileUrl = req.body.fileUrl;
-            attachment.TaskId = req.body.TaskId;
-
-            console.log("Нові дані: ", attachment.fileUrl, attachment.TaskId);
-            await attachment.save();
-
-            res.redirect(`/attachments/${attachmentId}`);
+            await attachment.update(req.body);
+            res.status(200).json(attachment);
         } else {
-            res.status(404).send("Вкладення не найдено");
+            res.status(404).json({ error: 'Вкладення не знайдено' });
         }
     } catch (error) {
-        console.log(error);
-        res.status(500).send("Виникла помилка");
+        res.status(500).json({ error: 'Виникла помилка' });
     }
 };
 
 const deleteAttachment = async (req, res) => {
     try {
         const attachment = await Attachment.findByPk(req.params.id);
-        if (!attachment) return res.status(404).render('error', { error: 'Attachment not found' });
+        if (!attachment) return res.status(404).json({ error: 'Вкладення не знайдено' });
 
         await attachment.destroy();
-        res.redirect('/attachments');
+        res.status(204).send();
     } catch (error) {
-        res.status(500).render('error', { error: 'Server error' });
+        res.status(500).json({ error: 'Серверна помилка' });
     }
 };
 
