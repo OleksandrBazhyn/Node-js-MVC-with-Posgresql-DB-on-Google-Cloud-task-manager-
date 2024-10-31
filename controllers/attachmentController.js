@@ -74,9 +74,22 @@ const updateAttachment = async (req, res) => {
     }
 };
 
+const deleteAttachment = async (req, res) => {
+    try {
+        const attachment = await Attachment.findByPk(req.params.id);
+        if (!attachment) return res.status(404).render('error', { error: 'Attachment not found' });
+
+        await attachment.destroy();
+        res.redirect('/attachments');
+    } catch (error) {
+        res.status(500).render('error', { error: 'Server error' });
+    }
+};
+
 module.exports = {
     createAttachment,
     getAllAttachments,
     getAttachmentById,
-    updateAttachment
+    updateAttachment,
+    deleteAttachment
 };

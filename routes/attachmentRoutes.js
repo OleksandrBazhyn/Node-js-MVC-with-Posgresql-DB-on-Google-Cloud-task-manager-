@@ -16,4 +16,6 @@ router.get('/:id', attachmentController.getAttachmentById);
 router.get('/:id/edit', attachmentController.getAttachmentById);
 router.put('/:id/edit', attachmentController.updateAttachment);
 
+router.delete('/:id', attachmentController.deleteAttachment);
+
 module.exports = router;
