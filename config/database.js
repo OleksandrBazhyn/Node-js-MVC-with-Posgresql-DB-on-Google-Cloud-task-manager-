@@ -1,55 +1,24 @@
 require('dotenv').config();
 const { Sequelize, QueryTypes } = require('sequelize');
 
-let sequelize;
-let tempSequelize;
-
-if (process.env.NODE_ENV !== 'production') {
-    tempSequelize = new Sequelize(
-        'postgres',
-        process.env.DB_USER,
-        process.env.DB_PASSWORD,
-        {
-            host: process.env.DB_HOST,
-            dialect: 'postgres',
-            port: process.env.DB_PORT,
-        }
-    );
-
-    sequelize = new Sequelize(
-        process.env.DB_NAME,
-        process.env.DB_USER,
-        process.env.DB_PASSWORD,
-        {
-            host: process.env.DB_HOST,
-            dialect: 'postgres',
-            port: process.env.DB_PORT,
-        }
-    );
-}
+const sequelize = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
+    {
+        host: process.env.DB_HOST,
+        dialect: 'mssql',
+        port: process.env.DB_PORT,
+    }
+);
 
 const initDb = async () => {
-    if (process.env.NODE_ENV === 'production') {
-        console.log('Skipping database connection in production environment.');
-        return;
-    }
     try {
         await connectToDatabase();
         await sequelize.sync();
         console.log('Database synced successfully.');
     } catch (error) {
-        if (error.original && error.original.code === '3D000') {
-            try {
-                await createDatabase();
-                await connectToDatabase();
-                await sequelize.sync();
-                console.log('Database synced successfully.');
-            } catch (createError) {
-                console.error('Error during database creation or syncing:', createError);
-            }
-        } else {
-            console.error('Unhandled error:', error);
-        }
+        console.error('Unhandled error:', error);
     }
 };
 
@@ -65,9 +34,7 @@ const connectToDatabase = async () => {
 
 const createDatabase = async () => {
     try {
-        await tempSequelize.query(`CREATE DATABASE "${process.env.DB_NAME}";`, { type: QueryTypes.RAW });
-        console.log('Database created successfully.');
-        await tempSequelize.close();
+        console.error('Database creation is not implemented in this code.');
     } catch (createError) {
         console.error('Unable to create the database:', createError);
         throw createError;
