@@ -17,7 +17,7 @@ app.use(helmet.contentSecurityPolicy({
     directives: {
         defaultSrc: ["'self'"], // дозволяє завантаження лише з того ж джерела
         scriptSrc: ["'self'", "'unsafe-inline'"], // дозволяє скрипти лише з того ж джерела
-        styleSrc: ["'self'", "'unsafe-inline'"], // дозволяє стилі лише з того ж джерела
+        // styleSrc: ["'self'", "'unsafe-inline'"], // дозволяє стилі лише з того ж джерела
         imgSrc: ["'self'", "data:"] // дозволяє зображення лише з того ж джерела і з data URI
     }
 }));
