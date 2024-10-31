@@ -4,7 +4,7 @@ const createTask = async (req, res) => {
     try {
         console.log('taskController.createTask\nRequest Body: ', req.body);
         const task = await Task.create(req.body);
-        res.status(301).redirect('/tasksList');
+        res.status(301).redirect('/tasks');
     } catch (error) {
         console.log('taskController.createTask\nError: ', error);
         res.status(400).render('taskForm', { error: error.errors.map(e => e.message) });
@@ -69,7 +69,7 @@ const deleteTask = async (req, res) => {
         if (!task) return res.status(404).render('error', { error: 'Task not found' });
 
         await task.destroy();
-        res.redirect('/tasksList');
+        res.redirect('/tasks');
     } catch (error) {
         res.status(500).render('error', { error: 'Server error' });
     }
