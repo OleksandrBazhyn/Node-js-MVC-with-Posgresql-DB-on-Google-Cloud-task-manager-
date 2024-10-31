@@ -21,9 +21,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    # Додатково: Тести, якщо є
     # - name: Run tests
-    #   run: npm test
+    # run: npm test  # Якщо у вас є тести
 
     - name: Deploy to Azure
       uses: Azure/webapps-deploy@v2
@@ -31,8 +30,3 @@ jobs:
         app-name: task-manager
         publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
         package: .
-      env:
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        DB_SERVER: ${{ secrets.DB_SERVER }}
-        DB_NAME: ${{ secrets.DB_NAME }}
