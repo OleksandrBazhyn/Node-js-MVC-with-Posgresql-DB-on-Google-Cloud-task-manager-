@@ -24,10 +24,10 @@
                         <% const task = tasks.find(task => task.id === attachment.TaskId); %>
                         <%= task ? task.title : 'No Task' %>
                     </td>
-                    <td><a href="/attachments/<%= attachment.id %>/edit">Редагувати</a></td>
+                    <td><a href="/attachments/<%= attachment.id %>/edit">Р РµРґР°РіСѓРІР°С‚Рё</a></td>
                     <td>
                         <form action="/attachments/<%= attachment.id %>?_method=DELETE" method="POST" style="display:inline;">
-                            <button type="submit">Видалити</button>
+                            <button type="submit">Р’РёРґР°Р»РёС‚Рё</button>
                         </form>
                     </td>
                 </tr>

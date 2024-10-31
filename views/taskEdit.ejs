@@ -2,25 +2,25 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Редагувати задачу</title>
+    <title>Р РµРґР°РіСѓРІР°С‚Рё Р·Р°РґР°С‡Сѓ</title>
 </head>
 <body>
-    <h1>Редагувати задачу</h1>
+    <h1>Р РµРґР°РіСѓРІР°С‚Рё Р·Р°РґР°С‡Сѓ</h1>
     <form action="/tasks/<%= task.id %>/edit?_method=PUT" method="POST">
-        <label for="title">Назва:</label>
+        <label for="title">РќР°Р·РІР°:</label>
         <input type="text" id="title" name="title" value="<%= task.title %>">
         <input type="text" id="description" name="description" value="<%= task.description %>">
         <br>
     
-        <label for="completed">Статус:</label>
+        <label for="completed">РЎС‚Р°С‚СѓСЃ:</label>
         <select id="completed" name="completed">
-            <option value="false" <%= task.completed === 'false' ? 'selected' : '' %>>В очікуванні</option>
-            <option value="true" <%= task.completed === 'true' ? 'selected' : '' %>>Завершена</option>
+            <option value="false" <%= task.completed === 'false' ? 'selected' : '' %>>Р’ РѕС‡С–РєСѓРІР°РЅРЅС–</option>
+            <option value="true" <%= task.completed === 'true' ? 'selected' : '' %>>Р—Р°РІРµСЂС€РµРЅР°</option>
         </select>
         <br>
 
-        <button type="submit">Зберегти</button>
+        <button type="submit">Р—Р±РµСЂРµРіС‚Рё</button>
     </form>
-    <a href="/tasks">Повернутися до задач</a>
+    <a href="/tasks">РџРѕРІРµСЂРЅСѓС‚РёСЃСЏ РґРѕ Р·Р°РґР°С‡</a>
 </body>
 </html>

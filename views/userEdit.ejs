@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Редагувати Користувача</title>
+    <title>Р РµРґР°РіСѓРІР°С‚Рё РљРѕСЂРёСЃС‚СѓРІР°С‡Р°</title>
 </head>
 <body>
-    <h1>Редагувати Користувача</h1>
+    <h1>Р РµРґР°РіСѓРІР°С‚Рё РљРѕСЂРёСЃС‚СѓРІР°С‡Р°</h1>
     <form action="/users/<%= user.id %>/edit?_method=PUT" method="POST">
-        <label for="username">Ім'я користувача:</label>
+        <label for="username">Р†Рј'СЏ РєРѕСЂРёСЃС‚СѓРІР°С‡Р°:</label>
         <input type="text" id="username" name="username" value="<%= user.username %>" required>
         <br>
-        <label for="email">Електронна пошта:</label>
+        <label for="email">Р•Р»РµРєС‚СЂРѕРЅРЅР° РїРѕС€С‚Р°:</label>
         <input type="email" id="email" name="email" value="<%= user.email %>" required>
         <br>
-        <button type="submit">Зберегти зміни</button>
+        <button type="submit">Р—Р±РµСЂРµРіС‚Рё Р·РјС–РЅРё</button>
     </form>
-    <a href="/users">Повернутися до списку користувачів</a>
+    <a href="/users">РџРѕРІРµСЂРЅСѓС‚РёСЃСЏ РґРѕ СЃРїРёСЃРєСѓ РєРѕСЂРёСЃС‚СѓРІР°С‡С–РІ</a>
 </body>
 </html>
