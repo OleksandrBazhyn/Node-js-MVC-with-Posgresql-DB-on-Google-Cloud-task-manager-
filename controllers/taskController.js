@@ -42,13 +42,13 @@ const updateTask = async (req, res) => {
         const taskId = req.params.id;
         const task = await Task.findByPk(taskId);
         if (task) {
-            console.log("Старі дані:", task.title, task.description, task.completed);
+            console.log("Старі дані: ", task.title, task.description, task.completed);
             
             task.title = req.body.title;
             task.description = req.body.description;
             task.completed = req.body.completed;
             
-            console.log("Нові дані:", task.title, task.description, task.completed);
+            console.log("Нові дані: ", task.title, task.description, task.completed);
 
             await task.save();
 

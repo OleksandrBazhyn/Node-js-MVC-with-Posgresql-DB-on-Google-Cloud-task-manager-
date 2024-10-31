@@ -13,4 +13,7 @@ router.get('/', attachmentController.getAllAttachments);
 
 router.get('/:id', attachmentController.getAttachmentById);
 
+router.get('/:id/edit', attachmentController.getAttachmentById);
+router.put('/:id/edit', attachmentController.updateAttachment);
+
 module.exports = router;

@@ -15,6 +15,7 @@ const getAllAttachments = async (req, res) => {
     try {
         const attachments = await Attachment.findAll();
         const tasks = await Task.findAll();
+        attachments.sort((a, b) => a.id - b.id);
         res.status(200).render('attachmentsList', { attachments, tasks });
     } catch (error) {
         console.error('Error fetching attachments:', error);
@@ -26,20 +27,21 @@ const getAttachmentById = async (req, res) => {
     try {
         const attachmentId = req.params.id;
         const attachment = await Attachment.findByPk(attachmentId);
+        console.log(attachment);
 
         if (!attachment) {
             return res.status(404).send('Вкладення не знайдено');
         }
-
-        // Знаходимо завдання, пов’язане з цим вкладенням
+        
         const task = await Task.findByPk(attachment.TaskId);
         if (!task) {
             console.log('Завдання не знайдено для цього вкладення');
         }
-
-        // Відображення сторінки редагування або детальної інформації
+        console.log(task);
+        
         if (req.path.includes('/edit')) {
-            return res.render('attachmentEdit', { attachment, task });
+            const tasks = await Task.findAll();
+            return res.render('attachmentEdit', { attachment, task, tasks });
         }
 
         res.render('attachmentDetail', { attachment, task });
@@ -49,8 +51,32 @@ const getAttachmentById = async (req, res) => {
     }
 };
 
+const updateAttachment = async (req, res) => {
+    try {
+        const attachmentId = req.params.id;
+        const attachment = await Attachment.findByPk(attachmentId);
+        if (attachment) {
+            console.log("Старі дані: ", attachment.fileUrl, attachment.TaskId);
+
+            attachment.fileUrl = req.body.fileUrl;
+            attachment.TaskId = req.body.TaskId;
+
+            console.log("Нові дані: ", attachment.fileUrl, attachment.TaskId);
+            await attachment.save();
+
+            res.redirect(`/attachments/${attachmentId}`);
+        } else {
+            res.status(404).send("Вкладення не найдено");
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Виникла помилка");
+    }
+};
+
 module.exports = {
     createAttachment,
     getAllAttachments,
-    getAttachmentById
+    getAttachmentById,
+    updateAttachment
 };

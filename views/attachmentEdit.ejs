@@ -11,6 +11,14 @@
         <input type="text" id="fileUrl" name="fileUrl" value="<%= attachment.fileUrl %>">
         <br>
 
+        <label for="task">Завдання:</label>
+        <select name="TaskId" id="task">
+            <% tasks.forEach(task => { %>
+                <option value="<%= task.id %>" <%= task.id === attachment.TaskId ? 'selected' : '' %>><%= task.title %></option>
+            <% }) %>
+        </select>
+        <br>
+
         <button type="submit">Зберегти</button>
     </form>
     <a href="/attachments">Повернутися до задач</a>
