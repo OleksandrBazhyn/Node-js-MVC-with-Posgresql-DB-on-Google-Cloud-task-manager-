@@ -4,7 +4,7 @@ const createTask = async (req, res) => {
     try {
         console.log('taskController.createTask\nRequest Body: ', req.body);
         const task = await Task.create(req.body);
-        res.status(301).redirect('/tasksList');
+        res.status(301).redirect('/tasks');
     } catch (error) {
         console.log('taskController.createTask\nError: ', error);
         res.status(400).render('taskForm', { error: error.errors.map(e => e.message) });
