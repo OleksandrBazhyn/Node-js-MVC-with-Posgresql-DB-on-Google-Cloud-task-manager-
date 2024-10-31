@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  task-manager:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/task-manager
+    environment:
+      - DB_HOST=db
+      - DB_USER=olexa
+      - DB_PASSWORD=54936
+      - DB_NAME=taskmanager
+      - DB_PORT=5432
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=olexa
+      - POSTGRES_PASSWORD=54936
+      - POSTGRES_DB=taskmanager
+
+volumes:
+  postgres_data:
