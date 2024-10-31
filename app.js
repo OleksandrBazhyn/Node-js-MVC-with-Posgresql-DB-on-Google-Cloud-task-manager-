@@ -7,24 +7,22 @@ const userRoutes = require('./routes/userRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const attachmentRoutes = require('./routes/attachmentRoutes');
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
+
 app.use((req, res, next) => {
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     next();
 });
 
 app.get('/', (req, res) => {
-    res.status(200).render('index');
+    res.status(200).send({ message: 'Welcome to the API' });
 });
 
-app.use('/users', userRoutes);
-app.use('/tasks', taskRoutes);
-app.use('/attachments', attachmentRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/tasks', taskRoutes);
+app.use('/api/attachments', attachmentRoutes);
 
 const startServer = async () => {
     await initDb();
