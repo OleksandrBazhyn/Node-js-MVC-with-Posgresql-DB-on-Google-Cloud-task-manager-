@@ -25,22 +25,29 @@ const getAllAttachments = async (req, res) => {
 const getAttachmentById = async (req, res) => {
     try {
         const attachmentId = req.params.id;
-        const attachment = await Attachment.findByPk(id);
+        const attachment = await Attachment.findByPk(attachmentId);
+
         if (!attachment) {
             return res.status(404).send('Вкладення не знайдено');
         }
 
-        const task = await Task.getById(task => task.id == attachment.TaskId)
+        // Знаходимо завдання, пов’язане з цим вкладенням
+        const task = await Task.findByPk(attachment.TaskId);
+        if (!task) {
+            console.log('Завдання не знайдено для цього вкладення');
+        }
 
+        // Відображення сторінки редагування або детальної інформації
         if (req.path.includes('/edit')) {
             return res.render('attachmentEdit', { attachment, task });
         }
 
         res.render('attachmentDetail', { attachment, task });
     } catch (error) {
+        console.error('Виникла помилка при отриманні вкладення:', error);
         res.status(500).send('Виникла помилка при отриманні вкладення');
     }
-}
+};
 
 module.exports = {
     createAttachment,

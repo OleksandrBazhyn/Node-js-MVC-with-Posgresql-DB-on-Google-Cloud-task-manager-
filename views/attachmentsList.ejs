@@ -18,11 +18,17 @@
         <tbody>
             <% attachments.forEach(attachment => { %>
                 <tr>
-                    <td><%= attachment.id %></td>
-                    <td><%= attachment.fileUrl %></td>
+                    <td><a href="/attachments/<%= attachment.id %>"><%= attachment.id %></a></td>
+                    <td><a href="<%= attachment.fileUrl %>" target="_blank"><%= attachment.fileUrl %></a></td>
                     <td>
                         <% const task = tasks.find(task => task.id === attachment.TaskId); %>
                         <%= task ? task.title : 'No Task' %>
+                    </td>
+                    <td><a href="/attachments/<%= attachment.id %>/edit">Редагувати</a></td>
+                    <td>
+                        <form action="/attachments/<%= attachment.id %>?_method=DELETE" method="POST" style="display:inline;">
+                            <button type="submit">Видалити</button>
+                        </form>
                     </td>
                 </tr>
             <% }) %>
