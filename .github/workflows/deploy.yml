@@ -21,18 +21,9 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Set environment variable
-      run: echo "NODE_ENV=production" >> $GITHUB_ENV
-
-    - name: Build the app
-      env:
-        NODE_ENV: production
-      run: |
-        echo "Starting app without DB connection for deployment"
-        node app.js || echo "DB connection skipped for deployment"
-
     - name: Set environment variables
       run: |
+        echo "NODE_ENV=production" >> $GITHUB_ENV
         echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
         echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
         echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
