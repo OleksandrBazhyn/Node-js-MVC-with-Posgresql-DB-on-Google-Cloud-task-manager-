@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Додати нове вкладення</title>
+    <title>Р”РѕРґР°С‚Рё РЅРѕРІРµ РІРєР»Р°РґРµРЅРЅСЏ</title>
 </head>
 <body>
-    <h1>Додати нове вкладення</h1>
+    <h1>Р”РѕРґР°С‚Рё РЅРѕРІРµ РІРєР»Р°РґРµРЅРЅСЏ</h1>
     <form action="/attachments/create" method="POST">
-        <label for="fileUrl">Посилання на файл:</label>
+        <label for="fileUrl">РџРѕСЃРёР»Р°РЅРЅСЏ РЅР° С„Р°Р№Р»:</label>
         <input type="text" id="fileUrl" name="fileUrl" required>
         <br>
-        <label for="task">Завдання:</label>
+        <label for="task">Р—Р°РІРґР°РЅРЅСЏ:</label>
         <select name="TaskId" id="task" required>
             <% tasks.forEach(task => { %>
                 <option value="<%= task.id %>"><%= task.title %></option>
             <% }) %>
         </select>
         <br>
-        <button type="submit">Додати задачу</button>
+        <button type="submit">Р”РѕРґР°С‚Рё Р·Р°РґР°С‡Сѓ</button>
     </form>
-    <a href="/attachments">Повернутися до задач</a>
+    <a href="/attachments">РџРѕРІРµСЂРЅСѓС‚РёСЃСЏ РґРѕ Р·Р°РґР°С‡</a>
 </body>
 </html>
