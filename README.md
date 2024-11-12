@@ -24,3 +24,12 @@ This repository, **Web Technologies**, serves as a demonstration of modern web d
    ```bash
    npm start
    ```
+
+## Deployment
+Supports deployment on cloud platforms with containerized solutions. Refer to the provided workflows and configuration files for automated CI/CD pipelines.
+
+## Contributing
+Feel free to fork this repository, submit issues, and make pull requests for improvements or new features.
+
+## License
+This project is licensed under the [MIT License](https://mit-license.org/).
