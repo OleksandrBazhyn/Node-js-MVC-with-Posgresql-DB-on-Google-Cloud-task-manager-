@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const methodOverride = require('method-override');
 const path = require('path');
@@ -6,6 +7,8 @@ const { initDb } = require('./config/database');
 const userRoutes = require('./routes/userRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const attachmentRoutes = require('./routes/attachmentRoutes');
+
+app.use(cors({ origin: 'http://localhost:3001' }));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
